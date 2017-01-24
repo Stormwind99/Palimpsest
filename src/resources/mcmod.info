@@ -1,0 +1,19 @@
+[
+{
+  "modid": "Palimpsest",
+  "name": "Palimpsest",
+  "description": "Erase Maps and Books for reuse by rubbing with Redstone Dust.",
+  "version": "$version",
+  "mcversion": "$mcversion",
+  "credits": "By Stormwind",
+  "logoFile": "/Palimpsest.png",
+  "url": "https://github.com/Stormwind99/Palimpsest",
+  "updateUrl": "",
+  "authorList": [ "Stormwind" ],
+  "parent": "",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]
