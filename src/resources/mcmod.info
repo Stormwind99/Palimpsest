@@ -1,6 +1,6 @@
 [
 {
-  "modid": "Palimpsest",
+  "modid": "palimpsest",
   "name": "Palimpsest",
   "description": "Erase Maps and Books for reuse by rubbing with Redstone Dust.",
   "version": "$version",

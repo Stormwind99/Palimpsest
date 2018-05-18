@@ -1,0 +1,20 @@
+{
+	"_comment": [
+		"Erase a Filled Map"
+	],
+	"type": "minecraft:crafting_shapeless",
+	"group": "palimpsest",
+	"ingredients": [
+		{
+			"item": "minecraft:filled_map"
+		},
+		{
+			"item": "minecraft:redstone",
+			"data": 0
+		}
+	],
+	"experience": 0.0,
+	"result": {
+		"item": "minecraft:map"
+	}
+}

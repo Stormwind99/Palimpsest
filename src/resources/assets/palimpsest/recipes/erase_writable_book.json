@@ -1,0 +1,21 @@
+{
+	"_comment": [
+		"Erase a Writable Book"
+	],
+	"type": "minecraft:crafting_shapeless",
+	"group": "palimpsest",
+	"ingredients": [
+		{
+			"item": "minecraft:writable_book",
+			"data": 0
+		},
+		{
+			"item": "minecraft:redstone",
+			"data": 0
+		}
+	],
+	"experience": 0.0,
+	"result": {
+		"item": "minecraft:writable_book"
+	}
+}	
