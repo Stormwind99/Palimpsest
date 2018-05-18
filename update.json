@@ -7,7 +7,7 @@
     "1.7.10-recommended": "1.0.2"
   },
   "1.12.2": {
-    "1.1.0": "Updated to 1.12.2",
+    "1.1.0": "Updated to MC 1.12.2",
     "1.0.2": "Eliminated all use of MCreator",
     "1.0.1": "Fixed erasing filled maps beyond Map #0",
     "1.0.0": "Initial version"

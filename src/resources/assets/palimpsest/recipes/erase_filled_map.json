@@ -6,7 +6,8 @@
 	"group": "palimpsest",
 	"ingredients": [
 		{
-			"item": "minecraft:filled_map"
+			"item": "minecraft:filled_map",
+			"data": 32767
 		},
 		{
 			"item": "minecraft:redstone",
