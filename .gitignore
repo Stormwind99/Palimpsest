@@ -45,6 +45,10 @@ world/
 /*_Client.launch
 /*_Server.launch
 
+## scratch space
+/old
+/tmp
+
 ## Windows
 Thumbs.db
 

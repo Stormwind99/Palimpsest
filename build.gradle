@@ -43,9 +43,17 @@ ext.configFile = file('build.properties')
 ext.config = parseConfig(configFile)
 ext.priv = parseConfig(file('private.properties'))
 
-version = "${config.version}-${config.build_number}"
+///version = "${config.version}-${config.build_number}"
+version = config.version
 group = config.group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = config.mod_id
+
+sourceSets {
+    main {
+        java { srcDirs = ["$projectDir/src/java"] }
+        resources { srcDirs = ["$projectDir/src/resources"] }
+    }
+}
 
 minecraft {
     version = "${config.mc_version}-${config.forge_version}"
@@ -58,7 +66,7 @@ minecraft {
     replace 'GRADLE:MOD_NAME', config.mod_name
     replace 'GRADLE:BUILD', config.build_number
     replace 'GRADLE:VERSION', config.version
-    replace 'GRADLE:INTERNALVERSIONPRE', config.internal_version_pre
+    replace 'GRADLE:INTERNALVERSIONMAJOR', config.internal_version_major
     replace 'GRADLE:DEPENDENCIES', config.dependencies
     replace 'GRADLE:UPDATEJSON', config.updatejson
 
@@ -245,7 +253,7 @@ curseforge {
         id = config.curseforge_id
         changelog = "${changelog}"
         releaseType = "release"
-        addGameVersion "${config.cf_meta_version}"
+        addGameVersion "${config.version}"
 ///        relations {
 ///            requiredLibrary 'baubles'
 ///            optionalLibrary 'quark'

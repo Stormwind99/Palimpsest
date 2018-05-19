@@ -1,4 +1,4 @@
-package com.wumple.palimpsest;
+package com.wumple.palimpsest.common;
 
 public final class LibMisc {
 
@@ -20,6 +20,5 @@ public final class LibMisc {
 	///public static final String GUI_FACTORY  = "com.wumple.palimpsest.client.core.proxy.GuiFactory";
 
 	// IMC Keys
-	public static final String BLACKLIST_ITEM = "blackListItem";
-
+	///public static final String BLACKLIST_ITEM = "blackListItem";
 }
