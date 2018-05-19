@@ -48,12 +48,12 @@ version = config.version
 group = config.group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = config.mod_id
 
-sourceSets {
-    main {
-        java { srcDirs = ["$projectDir/src/java"] }
-        resources { srcDirs = ["$projectDir/src/resources"] }
-    }
-}
+//sourceSets {
+//    main {
+//        java { srcDirs = ["$projectDir/src/java"] }
+//        resources { srcDirs = ["$projectDir/src/resources"] }
+//    }
+//}
 
 minecraft {
     version = "${config.mc_version}-${config.forge_version}"
