@@ -1,67 +1,50 @@
 // build.gradle for mod
 // Based on build.gradle from Botania by vazkii - https://botaniamod.net/
 
-import groovy.json.JsonSlurper
-import groovy.json.JsonOutput
-
+// START do not edit
 buildscript {
     repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'com.matthewprenger:CurseGradle:1.0-SNAPSHOT'
     }
 }
 
-///Example: vazkii's maven for Botania
-///repositories {
-///    mavenCentral()
-///    maven {
-///        name = "thiakil"
-///        url = "http://maven.thiakil.com"
-///    }
-///    maven {
-///        url "http://dvs1.progwml6.com/files/maven"
-///    }
-///}
+plugins {
+  id "com.matthewprenger.cursegradle" version "1.0.10"
+}
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.matthewprenger.cursegradle'
 apply plugin: 'maven'
+// END do not edit
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
 
 ext.configFile = file('build.properties')
 
 ext.config = parseConfig(configFile)
 ext.priv = parseConfig(file('private.properties'))
 
-///version = "${config.version}-${config.build_number}"
-version = config.version
-group = config.group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = config.mod_id
-
-//sourceSets {
-//    main {
-//        java { srcDirs = ["$projectDir/src/java"] }
-//        resources { srcDirs = ["$projectDir/src/resources"] }
-//    }
-//}
 
 minecraft {
     version = "${config.mc_version}-${config.forge_version}"
-    runDir = "eclipse/assets"
+    runDir = "eclipse"
 
     mappings = config.mc_mappings
-    //This, does the token replacement.
-    //Though, I recomend this to be replaced with a token such as @VERSION@
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+
+    // This does the token replacement so names, version numbers, etc only need to be in one authoritative file
+    // TODO replace with a token such as @VERSION@
     replace 'GRADLE:MOD_ID', config.mod_id
     replace 'GRADLE:MOD_NAME', config.mod_name
     replace 'GRADLE:BUILD', config.build_number
@@ -71,47 +54,47 @@ minecraft {
     replace 'GRADLE:UPDATEJSON', config.updatejson
 
     replaceIn 'LibMisc.java'
-    useDepAts = true
-    makeObfSourceJar = false
 }
 
-//This here is for SCP
-configurations {
-    sshAntTask
-}
+version = config.version
+group = config.group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = config.mod_id
 
-//End of the SCP config
-
-jar {
-    classifier = 'universal'
-    manifest {
-        /// attributes 'FMLAT': 'palimpsest.cfg'
+sourceSets {
+    main {
+        java { srcDirs = ["$projectDir/src/java"] }
+        resources { srcDirs = ["$projectDir/src/resources"] }
     }
 }
 
 dependencies {
-    /// deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
-    /// deobfCompile "mezz.jei:jei_1.12:4.7.0.67"
+    // you may put jars on which you depend on in ./libs
+    // or you may define them like so..
+    //compile "some.group:artifact:version:classifier"
+    //compile "some.group:artifact:version"
 
-    //and a bit more for SCP
-    sshAntTask "org.apache.ant:ant-jsch:1.7.1", "jsch:jsch:0.1.29"
+    // real examples
+    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+
+    // for more info...
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
 }
 
-compileJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-}
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-processResources {
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 
         // replace version and mcversion
-        expand 'version': project.version, 'mcversion': project.minecraft.version
+        expand 'version':project.version, 'mcversion':project.minecraft.version
     }
 
     // copy everything else, thats not the mcmod.info
@@ -120,115 +103,7 @@ processResources {
     }
 }
 
-/**
- * These, go outside of the processResources {}
- * Though, this was added with the NEI intergation commit (8bf4680)
- */
-task deobfJar(type: Jar) {
-    from(sourceSets.main.output)
-	archiveName = "${baseName} ${version}-deobf.${extension}"
-}
-
-artifacts {
-    archives deobfJar
-}
-/**
- * Increments the buildnumber in your config file, and saves it
- */
-task incrementBuildNumber(dependsOn: 'reobfJar') << {
-    config.build_number = (config.build_number.toString().toInteger()) + 1
-    configFile.withWriter {
-        config.toProperties().store(it, "")
-    }
-
-    // todo make this flexibile - collection of supported mc versions
-
-    file('web/versions.ini').append("\n${version}=${minecraft.version}")
-    file("${config.dir_repo}/version/${minecraft.version}.txt").write("${version}")
-}
-
-// I have no idea what I'm doing
-task wtfGradle2(type: Copy) {
-    from(jar.destinationDir)
-    into file("${config.dir_output}/wtf")
-}
-
-// Seriously, I'm desperate to make this work
-task wtfGradle1(type: Delete) {
-	dependsOn "wtfGradle2"
-    delete "${config.dir_output}/wtf/${deobfJar.archiveName}"
-}
-
-task output(type: Copy) {
-	dependsOn "wtfGradle1"
-	from(jar.destinationDir)
-    into file(config.dir_output)
-}
-
-task outputDeobf(type: Copy) {
-	dependsOn "output"
-	from(config.dir_output) {
-		include deobfJar.archiveName
-	}
-    into file("${config.dir_output}/deobf")
-}
-
-task forgecraft(type: Copy) {
-	dependsOn "outputDeobf"
-	from "${config.dir_output}/wtf"
-	into file(priv.dir_forgecraft)
-}
-
-task sort(type: Delete) {
-	dependsOn "forgecraft"
-	delete "${config.dir_output}/${deobfJar.archiveName}", "${config.dir_output}/wtf"
-}
-
-// This is the upload task from the build.xml
-task upload() << {
-    scp('/files') {
-        fileset(file: jar.archivePath)
-    }
-	
-	scp('/files/deobf') {
-        fileset(file: deobfJar.archivePath)
-    }
-
-    scp('/') {
-        fileset(file: 'web/changelog.txt')
-        fileset(file: 'web/versions.ini')
-    }
-}
-
-// This is deploy_web task
-task deployWeb << {
-    scp('/') {
-        fileset(dir: 'web') //everything from the web directory
-    }
-}
-
-def scp(String dir, Closure antFileset = {}) {
-    ant {
-        taskdef(
-            name: 'scp',
-            classname: 'org.apache.tools.ant.taskdefs.optional.ssh.Scp',
-            classpath: configurations.sshAntTask.asPath)
-
-        String dirstr = priv.scp_dir + dir
-        Map scpArgs = [
-           todir  : dirstr,
-           password  : priv.scp_pass,
-           sftp: true,
-           trust: 'yes'
-        ]
-
-        delegate.scp(scpArgs) {
-            antFileset.delegate = delegate
-            antFileset()
-        }
-    }
-}
-
+/// Local functions
 
 def parseConfig(File config) {
     config.withReader {
@@ -238,14 +113,7 @@ def parseConfig(File config) {
     }
 }
 
-jar {
-    //rename the default output, for some better... sanity with scripts
-    archiveName = "${baseName} ${version}.${extension}"
-
-    exclude "**/*.bat"
-    exclude "**/*.psd"
-    exclude "**/*.exe"
-}
+/// CurseGradle
 
 curseforge {
     apiKey = priv.cfkey
@@ -254,21 +122,5 @@ curseforge {
         changelog = "${changelog}"
         releaseType = "release"
         addGameVersion "${config.version}"
-///        relations {
-///            requiredLibrary 'baubles'
-///            optionalLibrary 'quark'
-///           optionalLibrary 'albedo'
-///      }
     }
 }
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: "file://" + (System.getenv("local_maven") != null ? System.getenv("local_maven") : System.getenv("bamboo_local_maven")))
-        }
-    }
-}
-
-///defaultTasks 'clean', 'build', 'sort', 'forgecraft', 'incrementBuildNumber', 'curseforge', 'upload'
-defaultTasks 'clean', 'build', 'sort', 'forgecraft', 'incrementBuildNumber', 'curseforge'
