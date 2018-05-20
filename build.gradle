@@ -103,6 +103,15 @@ processResources
     }
 }
 
+jar {
+    //rename the default output, for some better sanity with scripts
+    archiveName = "${baseName}-${minecraft.version}-${version}.${extension}"
+
+    exclude "**/*.bat"
+    exclude "**/*.psd"
+    exclude "**/*.exe"
+}
+
 /// Local functions
 
 def parseConfig(File config) {
@@ -119,8 +128,8 @@ curseforge {
     apiKey = priv.cfkey
     project {
         id = config.curseforge_id
-        changelog = "${changelog}"
+        changelog = new File("${changelog}")
         releaseType = "release"
-        addGameVersion "${config.version}"
+        addGameVersion "${config.mc_version}"
     }
 }
