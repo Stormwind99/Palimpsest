@@ -122,14 +122,24 @@ def parseConfig(File config) {
     }
 }
 
+def getChangelog() {
+    def updateJsonFile = new File("${projectDir}/${config.changelog}")
+    def updateJson = new JsonSlurper().parse(updateJsonFile) as Map
+    // this should error if changelog is missing change for this version - add one!
+    def changeinfo = new String(updateJson."${minecraft.version}"."${version}")
+    return changeinfo
+}
+
+config.changetext = getChangelog() 
+
 /// CurseGradle
 
 curseforge {
     apiKey = priv.cfkey
     project {
         id = config.curseforge_id
-        changelog = new File("${projectDir}/${config.changelog}")
+        changelog = config.changetext
         releaseType = "release"
-        addGameVersion "${config.mc_version}"
+        //addGameVersion "${config.mc_version}"
     }
 }
