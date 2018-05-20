@@ -128,7 +128,7 @@ curseforge {
     apiKey = priv.cfkey
     project {
         id = config.curseforge_id
-        changelog = new File("${changelog}")
+        changelog = new File("${projectDir}/${config.changelog}")
         releaseType = "release"
         addGameVersion "${config.mc_version}"
     }
