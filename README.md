@@ -1,5 +1,5 @@
 # Palimpsest
-Minecraft plugin: Erase Maps and Books for reuse by rubbing with Redstone Dust.
+Minecraft mod: Erase Maps and Books for reuse by rubbing with Redstone Dust.
 
 Historically, a palimpsest is "a manuscript page, either from a scroll or a book, from which the text has been scraped or washed off so that the page can be reused for another document" \[[Wikipedia](https://en.wikipedia.org/wiki/Palimpsest)\].   Materials for writing were expensive to create, so were reused when possible.
 
