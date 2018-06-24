@@ -1,3 +1,6 @@
+#eclipse
+/eclipse
+
 ## gradle
 /.gradle
 /build/
@@ -42,6 +45,7 @@ world/
 
 ## ForgeGradle
 /run
+/libs
 /*_Client.launch
 /*_Server.launch
 

@@ -1,6 +1,6 @@
 package com.wumple.palimpsest.common;
 
-public final class LibMisc {
+public final class Reference {
 
 	// Mod Constants
 	public static final String MOD_ID = "GRADLE:MOD_ID";
