@@ -19,18 +19,18 @@ This mod contains shapeless recipes that, when one of the following items is rub
 
 ## Recipes
 
-![Filled Map](https://github.com/Stormwind99/Palimpsest/raw/master/src/resources/screenshots/recipe-filled_map.png)
+![Filled Map](https://github.com/Stormwind99/Palimpsest/raw/master/other/screenshots/recipe-filled_map.png)
 
 Recipe: Filled Map and Redstone Dust to Empty Map
 
-![Writable Book](https://github.com/Stormwind99/Palimpsest/raw/master/src/resources/screenshots/recipe-writable_book.png)
+![Writable Book](https://github.com/Stormwind99/Palimpsest/raw/master/other/screenshots/recipe-writable_book.png)
 
 Recipe: Writable Book and Redstone Dust to Writable Book
 
-![Written Book](https://github.com/Stormwind99/Palimpsest/raw/master/src/resources/screenshots/recipe-written_book.png)
+![Written Book](https://github.com/Stormwind99/Palimpsest/raw/master/other/screenshots/recipe-written_book.png)
 
 Recipe: Written Book and Redstone Dust to Book
 
-![Enchanted Book](https://github.com/Stormwind99/Palimpsest/raw/master/src/resources/screenshots/recipe-enchanted_book.png)
+![Enchanted Book](https://github.com/Stormwind99/Palimpsest/raw/master/other/screenshots/recipe-enchanted_book.png)
 
 Recipe: Enchanted Book and Redstone Dust to Book
