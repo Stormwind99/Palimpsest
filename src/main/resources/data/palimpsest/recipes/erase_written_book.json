@@ -6,15 +6,12 @@
 	"group": "palimpsest",
 	"ingredients": [
 		{
-			"item": "minecraft:written_book",
-			"data": 0
+			"item": "minecraft:written_book"
 		},
 		{
-			"item": "minecraft:redstone",
-			"data": 0
+			"item": "minecraft:redstone"
 		}
 	],
-	"experience": 0.0,
 	"result": {
 		"item": "minecraft:book"
 	}

@@ -6,15 +6,12 @@
 	"group": "palimpsest",
 	"ingredients": [
 		{
-			"item": "minecraft:filled_map",
-			"data": 32767
+			"item": "minecraft:filled_map"
 		},
 		{
-			"item": "minecraft:redstone",
-			"data": 0
+			"item": "minecraft:redstone"
 		}
 	],
-	"experience": 0.0,
 	"result": {
 		"item": "minecraft:map"
 	}
