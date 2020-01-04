@@ -1,0 +1,24 @@
+{
+	"_comment": [
+		"Erase a Filled Mega Map"
+	],
+	"type": "minecraft:crafting_shapeless",
+	"conditions": [
+		{
+		"type": "forge:mod_loaded",
+		"modid": "megamap"
+		} 
+	],
+	"group": "palimpsest",
+	"ingredients": [
+		{
+			"item": "megamap:megamap_filled"
+		},
+		{
+			"item": "minecraft:redstone"
+		}
+	],
+	"result": {
+		"item": "megamap:megamap_empty"
+	}
+}
