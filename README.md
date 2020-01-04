@@ -7,6 +7,7 @@ Historically, a palimpsest is "a manuscript page, either from a scroll or a book
 This mod contains shapeless recipes that, when one of the following items is rubbed (aka crafted) with Redstone Dust, will produce a blank version of the item (consuming the Redstone Dust in the process):
 
 1. Filled Map
+1. Filled Mega Map from my [Mega Map mod](https://github.com/Stormwind99/MegaMap)
 1. Written Book
 1. Writable Book
 1. Enchanted Book
@@ -21,7 +22,7 @@ This mod contains shapeless recipes that, when one of the following items is rub
 
 ![Filled Map](https://github.com/Stormwind99/Palimpsest/raw/master/other/screenshots/recipe-filled_map.png)
 
-Recipe: Filled Map and Redstone Dust to Empty Map
+Recipe: Filled Map and Redstone Dust to Empty Map (same for a Filled Mega Map)
 
 ![Writable Book](https://github.com/Stormwind99/Palimpsest/raw/master/other/screenshots/recipe-writable_book.png)
 
